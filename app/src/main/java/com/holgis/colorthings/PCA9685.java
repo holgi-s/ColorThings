@@ -91,9 +91,9 @@ public class PCA9685 implements AutoCloseable {
 
     public void setPWM(int channel, float dutyCycle, float dutyOffset) throws IOException {
 
-        channel = ensureInBounds(channel, 0, 15);
-        dutyCycle = ensureInBounds(dutyCycle, 0.0f, 1.0f);
-        dutyOffset = ensureInBounds(dutyOffset, 0.0f, 1.0f);
+        channel = clamp(channel, 0, 15);
+        dutyCycle = clamp(dutyCycle, 0.0f, 1.0f);
+        dutyOffset = clamp(dutyOffset, 0.0f, 1.0f);
 
         int on = (int)Math.floor((4095.0f * dutyOffset)+0.5);
         int off = (int)Math.floor((4095.0f * dutyCycle)+0.5);
@@ -111,11 +111,11 @@ public class PCA9685 implements AutoCloseable {
 
     }
 
-    private int ensureInBounds(int value, int lowerBound, int upperBound){
-        return  Math.max(lowerBound, Math.min(value, upperBound));
+    private int clamp(int x, int minVal, int maxVal){
+        return  Math.max(minVal, Math.min(x, maxVal));
     }
-    private float ensureInBounds(float value, float lowerBound, float upperBound){
-        return  Math.max(lowerBound, Math.min(value, upperBound));
+    private float clamp(float x, float minVal, float maxVal){
+        return  Math.max(minVal, Math.min(x, maxVal));
     }
 }
 

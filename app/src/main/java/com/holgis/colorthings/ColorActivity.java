@@ -198,7 +198,7 @@ public class ColorActivity extends Activity implements GoogleApiClient.Connectio
         }
         // Automatically accept all requests
 
-        Log.d(TAG, "onConnectionRequest");
+        Log.v(TAG, "onConnectionRequest");
 
         Nearby.Connections.acceptConnectionRequest(mGoogleApiClient, remoteEndpointId,
                 myPayload, this).setResultCallback(new ResultCallback<Status>() {
@@ -231,7 +231,7 @@ public class ColorActivity extends Activity implements GoogleApiClient.Connectio
 
     @Override
     public void onMessageReceived(String endpointId, byte[] payload, boolean isReliable) {
-        Log.d(TAG, "onMessageReceived");
+        Log.v(TAG, "onMessageReceived");
 
         if(checkColor(payload)){
             mColor = parseColor(payload);
